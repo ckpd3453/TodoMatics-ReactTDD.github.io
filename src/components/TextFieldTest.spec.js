@@ -10,16 +10,14 @@ const DATA = [
 
 describe("Check whether the text field and the add button is rendered", ()=>{
     it("Check whether the Header appears",()=>{
-        const AppElement = render(<App data={DATA}/>);
-        expect(AppElement.getByTestId("Header")).toBeDefined();
-        //expect(AppElement.getByTestId("Header")).toHaveTextContent("Todo_Matic");
+        const { getByTestId } = render(<App data={DATA}/>);
+        expect(getByTestId("Header")).toBeDefined();
     });
 
     it("Check Whether the text field appears", ()=>{
         const textField = render(<TextField />);
         const textValue = textField.getByPlaceholderText("Enter the Note");
         expect(textValue).toHaveAttribute("value","");
-        //expect(textValue.value).toBe("");
     });
     
     it("Check whether the add button is disabled initially", ()=>{
@@ -39,7 +37,7 @@ describe("To check the functionality of the text field",()=>{
     it("Check whether the Add button becomes enabled after note is typed",()=>{
         const textField = render(<TextField/>);
         const textElement = textField.getByPlaceholderText("Enter the Note");
-        fireEvent.change(textElement, {target: {value: 'New note'}});       //remember "element.target.value"?
+        fireEvent.change(textElement, {target: {value: 'New note'}});       
         expect(textField.getByTestId("add-button")).not.toBeDisabled();
     });
 
